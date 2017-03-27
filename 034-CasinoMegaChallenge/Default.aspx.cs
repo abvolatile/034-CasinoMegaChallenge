@@ -62,27 +62,27 @@ namespace _034_CasinoMegaChallenge
 					resultLabel.Text = $"Sorry, you lost {bet:C}. Better luck next time!";
 		}
 
-		private void generateImages(Random random)
+		private void generateImages(Random random) //called on each button click
 		{
 			string[] images = new string[12] { "~/Bar.png", "~/Bell.png", "~/Cherry.png",
 				"~/Clover.png", "~/Diamond.png", "~/HorseShoe.png", "~/Lemon.png",
 				"~/Orange.png", "~/Plum.png", "~/Seven.png", "~/Strawberry.png",
 				"~/Watermellon.png" };
 
-			leftImage.ImageUrl = images[random.Next(0, 11)];
-			middleImage.ImageUrl = images[random.Next(0, 11)];
-			rightImage.ImageUrl = images[random.Next(0, 11)];
+			leftImage.ImageUrl = images[random.Next(12)]; //random img for left
+			middleImage.ImageUrl = images[random.Next(12)]; //random img for middle
+			rightImage.ImageUrl = images[random.Next(12)]; //random img for right
 		}
 
-		private void subtractBet(double bet)
+		private void subtractBet(double bet) //called after we know amt is a number
 		{
-			double moneyTotal = double.Parse(moneyLabel.Text);
-			if (moneyTotal >= bet)
+			double moneyTotal = double.Parse(moneyLabel.Text); //get current total
+			if (moneyTotal >= bet) //if bet isn't more than total
 			{
-				moneyTotal -= bet;
-				moneyLabel.Text = $"{moneyTotal:N2}";
+				moneyTotal -= bet; //subtract the bet amount from the total
+				moneyLabel.Text = $"{moneyTotal:N2}"; //set the label to the new total
 			}
-			else
+			else //if bet amount is more than remaining total
 				resultLabel.Text = "You don't have enough money for that!";
 		}
 
