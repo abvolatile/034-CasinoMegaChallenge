@@ -69,9 +69,9 @@ namespace _034_CasinoMegaChallenge
 				"~/Orange.png", "~/Plum.png", "~/Seven.png", "~/Strawberry.png",
 				"~/Watermellon.png" };
 
-			leftImage.ImageUrl = images[random.Next(0, 11)];
-			middleImage.ImageUrl = images[random.Next(0, 11)];
-			rightImage.ImageUrl = images[random.Next(0, 11)];
+			leftImage.ImageUrl = images[random.Next(12)];
+			middleImage.ImageUrl = images[random.Next(12)];
+			rightImage.ImageUrl = images[random.Next(12)];
 		}
 
 		private void subtractBet(double bet)
