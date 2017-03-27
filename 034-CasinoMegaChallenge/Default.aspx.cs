@@ -43,7 +43,9 @@ namespace _034_CasinoMegaChallenge
 
 			//check if there's a bar and display lose message
 			else if (checkForBar(bet))
-				return;
+				if (double.Parse(moneyLabel.Text) == 0)
+					zeroBalanceRefresh();
+				else return;
 
 			//check if there's all 7's, display win message & add winnings to total
 			else if (checkForSevens(bet))
@@ -53,16 +55,11 @@ namespace _034_CasinoMegaChallenge
 			else if (checkForCherries(bet))
 				return;
 
-			//if no money left after the above - display message, wait 5 seconds and refresh page
-			else if (double.Parse(moneyLabel.Text) == 0)
-			{
-				resultLabel.Text = "You're out of money! (refreshing page...)";
-				//Response.Redirect(Request.RawUrl); // just refreshes immediately...
-				Response.AddHeader("REFRESH", "2;URL=Default.aspx");
-			}
-
 			else //generate losing message 
-				resultLabel.Text = $"Sorry, you lost {bet:C}. Better luck next time!";
+				if (double.Parse(moneyLabel.Text) == 0)
+					zeroBalanceRefresh();
+				else
+					resultLabel.Text = $"Sorry, you lost {bet:C}. Better luck next time!";
 		}
 
 		private void generateImages(Random random)
@@ -142,5 +139,13 @@ namespace _034_CasinoMegaChallenge
 			newTotal += winAmount;
 			moneyLabel.Text = $"{newTotal:N2}";
 		}
-	}
+
+		private void zeroBalanceRefresh()
+		{
+			//if no money left - display message, wait 5 seconds and refresh page
+			resultLabel.Text = "You're out of money! (refreshing page...)";
+			//Response.Redirect(Request.RawUrl); // just refreshes immediately...
+			Response.AddHeader("REFRESH", "2;URL=Default.aspx");
+		}
+}
 }
